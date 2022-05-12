@@ -10,10 +10,10 @@
     "clean": "rm -rf ./dist && rm -rf ./build",
     "build": "npm run esbuild",
     "zip": "cd dist && zip -q -r lambda.zip lambda.js lambda.js.map",
-    "dist": "tsc && npm test && npm run build && npm run zip",
+    "dist": "tsc && npm run build && npm run zip",
     "esbuild": "esbuild --bundle --minify --keep-names --sourcemap --sources-content=false --target=node14 --platform=node --outfile=dist/lambda.js src/lambda.ts",
     "deploy": "aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://dist/lambda.zip",
-    "stack": "npm run dist && cd infrastructure && npm test && npx cdk deploy"
+    "stack": "npm run dist && cd infrastructure && npx cdk deploy"
   },
   "husky": {
     "hooks": {

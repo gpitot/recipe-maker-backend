@@ -6,7 +6,7 @@ export const roleAssumer = async (
   sourceCreds: Credentials,
   assumeRoleRequest: AssumeRoleRequest
 ) => {
-  const sts = new STS({ region: 'eu-west-1', credentials: sourceCreds })
+  const sts = new STS({ region: process.env['REGION'], credentials: sourceCreds })
   const { Credentials } = await sts.assumeRole(assumeRoleRequest)
   if (!Credentials) throw Error('Could not assume role')
   return {
