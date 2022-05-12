@@ -9,11 +9,11 @@
     "test": "jest",
     "clean": "rm -rf ./dist && rm -rf ./build",
     "build": "npm run esbuild",
-    "zip": "cd dist && zip -q -r lambda.zip lambda.js lambda.js.map",
-    "dist": "tsc && npm run build && npm run zip",
-    "esbuild": "esbuild --bundle --minify --keep-names --sourcemap --sources-content=false --target=node14 --platform=node --outfile=dist/lambda.js src/lambda.ts",
-    "deploy": "aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://dist/lambda.zip",
-    "stack": "npm run dist && cd infrastructure && npx cdk deploy"
+    "dist": "tsc && npm run build",
+    "esbuild": "ts-node -T build.config.ts",
+    "deploy": "sh deploy.sh && cd infrastructure && npx cdk deploy aws lambda update-function-code --function-name DBConnect --zip-file fileb://dist/Connect.zip",
+    "stack": "npm run dist && npm run deploy",
+    "oldstck": "npm run dist && cd infrastructure && npx cdk deploy aws lambda update-function-code --function-name DBConnect --zip-file fileb://dist/Connect.zip"
   },
   "husky": {
     "hooks": {
@@ -24,8 +24,14 @@
     "node": ">=12"
   },
   "dependencies": {
+    "@aws-sdk/client-codedeploy": "^3.87.0",
     "@aws-sdk/client-s3": "^3.20.0",
-    "@aws-sdk/client-sts": "^3.20.0"
+    "@aws-sdk/client-sts": "^3.20.0",
+    "aws-cdk": "^2.23.0",
+    "aws-xray-sdk": "^3.3.5",
+    "aws-xray-sdk-core": "^3.3.5",
+    "aws-xray-sdk-mysql": "^3.3.5",
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
