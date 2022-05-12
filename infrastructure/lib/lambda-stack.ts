@@ -9,11 +9,12 @@ export class LambdaStack extends Stack {
     // const isTest = process.env.NODE_ENV === 'test'
 
     FunctionList.functions.forEach(({ name, description}) => {
+      console.log(`deploying ${name}`);
       new Function(this, name, {
         functionName: name,
         description: description,
         runtime: Runtime.NODEJS_14_X,
-        handler: 'index.handler',
+        handler: `${name}/index.handler`,
         code: Code.fromAsset(`../dist/${name}.zip`),
         memorySize: 256,
         timeout: Duration.minutes(5),

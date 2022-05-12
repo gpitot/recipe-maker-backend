@@ -9,11 +9,9 @@
     "test": "jest",
     "clean": "rm -rf ./dist && rm -rf ./build",
     "build": "npm run esbuild",
-    "dist": "tsc && npm run build",
+    "dist": "tsc && npm run clean && npm run build",
     "esbuild": "ts-node -T build.config.ts",
-    "deploy": "sh deploy.sh && cd infrastructure && npx cdk deploy aws lambda update-function-code --function-name DBConnect --zip-file fileb://dist/Connect.zip",
-    "stack": "npm run dist && npm run deploy",
-    "oldstck": "npm run dist && cd infrastructure && npx cdk deploy aws lambda update-function-code --function-name DBConnect --zip-file fileb://dist/Connect.zip"
+    "stack": "npm run dist && sh zip.sh && cd infrastructure && npx cdk deploy"
   },
   "husky": {
     "hooks": {
