@@ -3,3 +3,5 @@ dist/
 build/
 .cache/
 .env
+.DS_Store
+src/CommonLayer/nodejs/Utilities

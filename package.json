@@ -7,11 +7,13 @@
   "scripts": {
     "start": "ts-node -T src/start.ts",
     "test": "jest",
-    "clean": "rm -rf ./dist && rm -rf ./build",
+    "clean": "rm -rf ./dist && rm -rf ./build && rm -rf ./src/CommonLayer/dist ",
     "build": "npm run esbuild",
     "dist": "tsc && npm run clean && npm run build",
     "esbuild": "ts-node -T build.config.ts",
-    "stack": "npm run dist && sh zip.sh && cd infrastructure && npx cdk deploy"
+    "stack": "npm run dist && sh zip.sh && npm run layer",
+    "layer": "sh zip-layer.sh",
+    "deploy": "cd infrastructure && npx cdk deploy"
   },
   "husky": {
     "hooks": {
