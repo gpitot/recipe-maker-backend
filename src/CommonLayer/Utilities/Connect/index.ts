@@ -1,5 +1,5 @@
 //import {captureMySQL} from 'aws-xray-sdk';
-import mysql from 'mysql2/promise';
+import mysql from 'mysql2';
 
 // const mysql = captureMySQL(mysql2)
 
@@ -8,20 +8,22 @@ type Config = {
     user : string;
     password : string;
     host : string;
+    database: string;
 }
 
-export const connect = async (sql : string, config: Config) => {
+type Props = {
+    sql : string;
+    config : Config;
+    params? : any[];
+}
+
+export const connect = async ({sql, params=[], config} : Props) => {
+    const connection = mysql.createConnection(config);
+    connection.connect();
     try {
-        console.log('GUILLAUME CONFIG ', config, process.env.databaseUser);
-        const connection = await mysql.createConnection({
-            ...config,
-            database : 'lambdadb'
-        });
-        console.log('GUILLAUME CONNECTION', connection);
-        connection.connect();
-        const data = await connection.query(sql);
+        const results = await connection.promise().query(sql, params);
         connection.end();
-        return Promise.resolve(data);
+        return Promise.resolve(results);
     } catch (err) {
         return Promise.reject(err);
     }

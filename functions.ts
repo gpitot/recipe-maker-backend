@@ -1,13 +1,18 @@
 export default {
     "functions" : [
         {
-            "name" : "MeasurementsGET",
-            "path" : "Measurements/GET",
+            "name" : "DatabaseAdmin",
+            "path" : "DatabaseAdmin",
             "description" : "",
         },
         {
-            "name" : "MeasurementsPOST",
-            "path" : "Measurements/POST",
+            "name" : "Insert",
+            "path" : "Insert",
+            "description" : "",
+        },
+        {
+            "name" : "Select",
+            "path" : "Select",
             "description" : "",
         }
     ]

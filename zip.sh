@@ -1,6 +1,6 @@
 #!/bin/sh
 
-NAMES=('MeasurementsGET' 'MeasurementsPOST')
+NAMES=('DatabaseAdmin' 'Insert' 'Select')
 # zip
 cd dist
 for name in "${NAMES[@]}"

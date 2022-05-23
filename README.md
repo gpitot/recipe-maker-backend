@@ -44,3 +44,15 @@ As esbuild is only transpiling typescript, a separate call to `tsc` run is neces
 - `--sourcemap --sources-content=false` generates a small source-map without embedded sources
 - `--keepnames` does not minifiy names which makes stack traces even more human readable
 - `NODE_OPTIONS=--enable-source-maps` enables experimental source-map support in AWS Lambda nodejs
+
+
+
+
+
+## Notes
+* import path must be `/opt/` not `opt/` 
+
+
+
+## To do
+* add database for this app, it cannot connect to other application database even with credentials?
