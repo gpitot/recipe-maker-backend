@@ -21,7 +21,7 @@ export const connect = async ({sql, params=[], config} : Props) => {
     const connection = mysql.createConnection(config);
     connection.connect();
     try {
-        const results = await connection.promise().query(sql, params);
+        const [results] = await connection.promise().query(sql, params);
         connection.end();
         return Promise.resolve(results);
     } catch (err) {

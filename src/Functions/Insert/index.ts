@@ -16,7 +16,7 @@ enum Table {
     recipe_ingredients = 'recipe_ingredients'
 }
 
-type Query = RecipeInsert | IngredientsInsert | RecipeIngredientInsert;
+type Query = RecipeInsert | IngredientsInsert | RecipeIngredientInsert | UnitsInsert;
 
 type RecipeInsert = {
     table : Table.recipes;
@@ -31,6 +31,11 @@ type IngredientsInsert = {
 type RecipeIngredientInsert = {
     table : Table.recipe_ingredients;
     params : [string, number]
+}
+
+type UnitsInsert = {
+    table : Table.units;
+    params : [string]
 }
 
 
@@ -51,6 +56,11 @@ exports.handler = async (query : Query) => {
 
         case Table.recipe_ingredients:
             sql = 'insert into recipe_ingredients (name, amount) values (?, ?);'
+            break;
+
+
+        case Table.units:
+            sql = 'insert into units (name) values (?);';
             break;
 
         default:
