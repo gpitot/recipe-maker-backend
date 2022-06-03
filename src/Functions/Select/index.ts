@@ -40,7 +40,7 @@ exports.handler = async (query : Query) => {
             break;
 
         case Table.recipe_ingredients:
-            sql = 'select * from recipe_ingredients where recipe_id = ?;'
+            sql = 'select ingredient, amount from recipe_ingredients where recipe_id = ?;'
             params = [recipe_id]
             break;
 

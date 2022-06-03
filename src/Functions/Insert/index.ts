@@ -30,7 +30,7 @@ type IngredientsInsert = {
 
 type RecipeIngredientInsert = {
     table : Table.recipe_ingredients;
-    params : [string, number]
+    params : [number, string, number]
 }
 
 type UnitsInsert = {
@@ -55,7 +55,7 @@ exports.handler = async (query : Query) => {
             break;
 
         case Table.recipe_ingredients:
-            sql = 'insert into recipe_ingredients (name, amount) values (?, ?);'
+            sql = 'insert into recipe_ingredients (recipe_id, name, amount) values (?, ?, ?);'
             break;
 
 
